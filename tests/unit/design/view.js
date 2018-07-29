@@ -12,12 +12,12 @@
 
 'use strict';
 
-const viewDesign = require('../../helpers/unit').unit([
+const viewDesignV2_1_2 = require('../../helpers/unit').unit([
   'view',
   'view'
-]);
+], null, "2.1.2");
 
-viewDesign('alice', 'by_id', {
+viewDesignV2_1_2('alice', 'by_id', {
   keys: ['foobar', 'barfoo'],
   'include_docs': true
 }, {
@@ -33,7 +33,7 @@ viewDesign('alice', 'by_id', {
   uri: '/mock/_design/alice/_view/by_id'
 });
 
-viewDesign('alice', 'by_id', {
+viewDesignV2_1_2('alice', 'by_id', {
   queries: [{ keys: ['foobar', 'barfoo']}, { limit: 3, skip: 2 }],
   include_docs: true
 }, {
@@ -47,4 +47,25 @@ viewDesign('alice', 'by_id', {
     'include_docs': true
   },
   uri: '/mock/_design/alice/_view/by_id'
+});
+
+const viewDesignV2_2_0 = require('../../helpers/unit').unit([
+  'view',
+  'view'
+], null, "2.2.0");
+
+viewDesignV2_2_0('alice', 'by_id', {
+  queries: [{ keys: ['foobar', 'barfoo']}, { limit: 3, skip: 2 }],
+  include_docs: true
+}, {
+  body: '{"queries":[{"keys":["foobar","barfoo"]},{"limit":3,"skip":2}]}',
+  headers: {
+    accept: 'application/json',
+    'content-type': 'application/json'
+  },
+  method: 'POST',
+  qs: {
+    'include_docs': true
+  },
+  uri: '/mock/_design/alice/_view/by_id/queries'
 });
