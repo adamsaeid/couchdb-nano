@@ -17,16 +17,15 @@ const Client = require('../../lib/nano');
 const test  = require('tape');
 const _ = require('underscore');
 
-helpers.unit = function(method, error) {
+helpers.unit = function(method, error, version) {
   const unitName = 'nano/tests/unit/' + method.join('/');
   const debug = require('debug')(unitName);
 
   function log(data) {
     debug({ got: data.body });
   }
-
-  let cli = helpers.mockClientOk(log, error);
-
+  
+  let cli = helpers.mockClientOk(log, error, version)
   //
   // allow database creation and other server stuff
   //
@@ -99,7 +98,11 @@ helpers.unit = function(method, error) {
 };
 
 function mockClient(code, path, extra) {
-  return function(debug, error) {
+  return function(debug, error, version) {
+    var body = '{}';
+    if (version) {
+      body = '{"version": "' + version + '"}'
+    }
     extra = extra || {};
     const opts = _.extend(extra, {
       url: helpers.couch + path,
@@ -113,7 +116,8 @@ function mockClient(code, path, extra) {
         } else {
           cb(null, {
             statusCode: code,
-            headers: {}
+            headers: {},
+            body
           }, req); }
         }
     });
