@@ -63,6 +63,7 @@ See [Migration Guide for switching from Nano 6.x to 7.x](migration_6_to_7.md).
   - [db.listAsStream([params], [callback])](#dblistasstreamparams-callback)
   - [db.fetch(docnames, [params], [callback])](#dbfetchdocnames-params-callback)
   - [db.fetchRevs(docnames, [params], [callback])](#dbfetchrevsdocnames-params-callback)
+  - [db.query(queries, [params], [callback])](#dbqueryqueries-params-callback)
   - [db.createIndex(indexDef, [callback])](#dbcreateindexindexdef-callback)
 - [Multipart functions](#multipart-functions)
   - [db.multipart.insert(doc, attachments, [params], [callback])](#dbmultipartinsertdoc-attachments-params-callback)
