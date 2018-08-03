@@ -682,10 +682,31 @@ alice.fetch({keys: keys}).then((data) => {
 
 ** changed in version 6 **
 
-Bulk fetch of the revisions of the database documents, `docnames` are specified as per
+Bulk fetch of the database documents, `docnames` are specified as per
 [CouchDB doc](http://docs.couchdb.org/en/latest/api/database/bulk-api.html#post--db-_all_docs).
-additional query string `params` can be specified, this is the same method as fetch but
- `include_docs` is not automatically set to `true`.
+additional query string `params` can be specified, `include_docs` is always set
+to `true`.
+
+### db.query(queries, [params], [callback])
+
+**Requires CouchDB 2.2.0 or above.**
+
+Retrieve database documents matching given queries. `queries` are specified as per
+[CouchDB doc](http://docs.couchdb.org/en/latest/api/database/bulk-api.html#sending-multiple-queries-to-a-database).
+additional query string `params` can be specified, `include_docs` is always set
+to `true`.
+
+```js
+const queries = [
+  {keys: ['tiger', 'zebra', 'donkey']},
+  {limit: 2, skip:3}
+];
+alice.query({queries: queries}).then((data) => {
+  console.log(data);
+});
+```
+
+
 
 ### db.createIndex(indexDef, [callback])
 
