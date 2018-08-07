@@ -22,7 +22,7 @@ it('should insert a bunch of items', helpers.insertThree);
 
 
 it('should be able to retrieve rtsults for one query', function(assert) {
-  const p = db.query({ queries:  [{limit: 2}] }, function(error, resp) {
+  const p = db.query({ queries:  [{limit: 2}] }, {include_docs: true}, function(error, resp) {
     assert.equal(error, null, 'should work');
     assert.equal(resp.results.length, 1, 'and get 1 set of query results');
     assert.equal(resp.results[0].rows.length, 2, 'and return correct query results');
@@ -39,7 +39,7 @@ it('should be able to retrieve rtsults for one query', function(assert) {
 });
 
 it('should be able to retrieve results for multiple queries', function (assert) {
-  const p = db.query({ queries:  [{limit: 2}, { keys: ['foobar', 'barfoo']}] }, function(error, resp) {
+  const p = db.query({ queries:  [{limit: 2}, { keys: ['foobar', 'barfoo']}] }, {include_docs: true}, function(error, resp) {
     assert.equal(error, null, 'should work');
     assert.equal(resp.results.length, 2, 'and get 2 sets of query results');
     assert.equal(resp.results[0].rows.length, 2, 'and return correct results for first query');

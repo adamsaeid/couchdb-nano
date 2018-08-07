@@ -694,8 +694,7 @@ to `true`.
 
 Retrieve database documents matching given queries. `queries` are specified as per
 [CouchDB doc](http://docs.couchdb.org/en/latest/api/database/bulk-api.html#sending-multiple-queries-to-a-database).
-additional query string `params` can be specified, `include_docs` is always set
-to `true`.
+Additional query string `params` can be specified.
 
 ```js
 const queries = [
